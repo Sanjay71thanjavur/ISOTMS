@@ -11,9 +11,6 @@ jobs:
       - name: 📂 Checkout Code
         uses: actions/checkout@v4
 
-      - name: 🛠️ Set Linux Permissions
-        run: chmod +x ./run.py
-
       - name: 🚀 Sync to Azure WebJob Folder
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -21,3 +18,7 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
+          # These 3 lines fix the 'ECONNRESET' error
+          protocol: ftps
+          port: 990
+          security: strict
