@@ -17,8 +17,4 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          # We are moving the files to the specific triggered job folder
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # Minimum settings to avoid triggering the firewall
-          protocol: ftp
-          port: 21
