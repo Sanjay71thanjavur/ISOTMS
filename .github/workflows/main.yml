@@ -18,6 +18,9 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # This specific protocol 'ftps-legacy' uses Port 990 correctly
-          protocol: ftps-legacy
+          # Forced settings to match your working FileZilla connection
+          protocol: ftps
           port: 990
+          security: loose
+          # Adding this to handle the specific Singapore server handshake
+          force-pasv: true
