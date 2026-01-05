@@ -11,14 +11,14 @@ jobs:
       - name: 📂 Checkout Code
         uses: actions/checkout@v4
 
-      - name: 🚀 Sync to Azure WebJob Folder
+      - name: 🚀 Simple FTP Sync
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
+          # We are moving the files to the specific triggered job folder
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # These 3 lines fix the 'ECONNRESET' error
-          protocol: ftps
-          port: 990
-          security: strict
+          # Minimum settings to avoid triggering the firewall
+          protocol: ftp
+          port: 21
