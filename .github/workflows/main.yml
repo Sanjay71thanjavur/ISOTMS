@@ -1,0 +1,23 @@
+name: Deploy Automation Worker
+on:
+  push:
+    branches:
+      - main  # This starts the robot every time you click 'Commit'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🚀 Sync to Azure WebJob Folder
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          # This specific path tells Azure "Run this in the background"
+          server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
+          # Optional: This removes old files on the server to keep it clean
+          delete-destination: false
