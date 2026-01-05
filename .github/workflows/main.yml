@@ -18,7 +18,6 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # These lines match your FileZilla 'TLS' settings
-          protocol: ftps
+          # This specific protocol 'ftps-legacy' uses Port 990 correctly
+          protocol: ftps-legacy
           port: 990
-          security: strict
