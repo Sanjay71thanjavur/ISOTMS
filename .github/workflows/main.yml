@@ -5,7 +5,7 @@ on:
 
 jobs:
   deploy:
-    runs-runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 📂 Checkout Code
         uses: actions/checkout@v4
@@ -13,6 +13,7 @@ jobs:
       - name: 📦 Create Deployment Bundle
         run: zip -r deploy.zip . -x "*.git*"
 
+      # This bypasses the FTP Timeout/530 errors by using HTTPS
       - name: 🚀 Push to Azure (Bypass FTP)
         run: |
           curl -X POST \
