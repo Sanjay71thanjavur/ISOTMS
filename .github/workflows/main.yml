@@ -1,10 +1,23 @@
-- name: 🚀 Sync to Azure WebJob Folder
+name: Deploy Automation Worker
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📂 Checkout Code
+        uses: actions/checkout@v4
+
+      - name: 🛠️ Set Linux Permissions
+        run: chmod +x ./run.py
+
+      - name: 🚀 Sync to Azure WebJob Folder
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # Adding these two lines helps bypass the connection reset error
-          port: 21
-          protocol: ftp
