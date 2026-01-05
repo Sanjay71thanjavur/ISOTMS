@@ -11,13 +11,14 @@ jobs:
       - name: 📂 Checkout Code
         uses: actions/checkout@v4
 
-      - name: 🚀 Sync via FTP
+      - name: 🚀 Sync to Azure WebJob
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           server-dir: /site/wwwroot/App_Data/jobs/triggered/login-worker/
-          # Ensure we use standard FTP since it successfully reached the 530 error
-          protocol: ftp
-          port: 21
+          # These lines match your FileZilla 'TLS' settings
+          protocol: ftps
+          port: 990
+          security: strict
